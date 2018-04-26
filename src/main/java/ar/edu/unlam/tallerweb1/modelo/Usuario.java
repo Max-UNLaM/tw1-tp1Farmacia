@@ -32,7 +32,7 @@ public class Usuario {
 	}
 	public void setEmail(String email) {
 		this.email = email;
-	}nt
+	}
 	public String getPassword() {
 		return password;
 	}
