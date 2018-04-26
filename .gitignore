@@ -73,3 +73,6 @@ fabric.properties
 # Editor-based Rest Client
 .idea/httpRequests
 
+/.idea/tw1-tp1Farmacia.iml
+/.idea/misc.xml
+/.idea/modules.xml
