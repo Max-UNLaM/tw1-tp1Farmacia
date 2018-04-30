@@ -1,6 +1,8 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Comuna {
@@ -8,8 +10,15 @@ public class Comuna {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nombre;
+
     @OneToMany
-    private Barrio[] barrios;
+    private List<Barrio> barrios = new ArrayList<>();
+
+    public Comuna(){}
+
+    public Comuna(String nombre) {
+        this.setNombre(nombre);
+    }
 
     public Long getId() {
         return id;
@@ -27,11 +36,11 @@ public class Comuna {
         this.nombre = nombre;
     }
 
-    public Barrio[] getBarrios() {
+    public List<Barrio> getBarrios() {
         return barrios;
     }
 
-    public void setBarrios(Barrio[] barrios) {
+    public void setBarrios(List<Barrio> barrios) {
         this.barrios = barrios;
     }
 }

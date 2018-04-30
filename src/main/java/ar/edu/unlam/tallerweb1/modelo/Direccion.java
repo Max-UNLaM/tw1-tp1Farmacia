@@ -10,7 +10,15 @@ public class Direccion {
     private String calle;
     private Number numero;
     @OneToOne
-    private Direccion direccion;
+    private Barrio barrio;
+
+    public Direccion(){}
+
+    public Direccion(String calle, Number numero, String barrio, String comuna) {
+        setCalle(calle);
+        setNumero(numero);
+        setBarrio(new Barrio(barrio, comuna));
+    }
 
     public Long getId() {
         return id;
@@ -36,11 +44,11 @@ public class Direccion {
         this.numero = numero;
     }
 
-    public Direccion getDireccion() {
-        return direccion;
+    public Barrio getBarrio() {
+        return barrio;
     }
 
-    public void setDireccion(Direccion direccion) {
-        this.direccion = direccion;
+    public void setBarrio(Barrio barrio) {
+        this.barrio = barrio;
     }
 }

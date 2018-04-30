@@ -1,6 +1,7 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
 import javax.persistence.*;
+import java.util.Random;
 
 @Entity
 public class Farmacia {
@@ -13,14 +14,33 @@ public class Farmacia {
     @OneToOne
     private Punto geoLocalizacion;
 
-    public Farmacia() {
+    @OneToOne
+    private Direccion direccion;
 
+    public Farmacia() {
     }
 
-    public Farmacia(String nombre, String telefono, String diaDeTurno) {
+    public Farmacia (String nombre, String telefono, String diaDeTurno) {
         this.setNombre(nombre);
         this.setTelefono(telefono);
         this.setDiaDeTurno(diaDeTurno);
+    }
+
+    public Farmacia(String nombre, String telefono, String diaDeTurno, Direccion direccion) {
+        Random randomGenerator = new Random();
+        this.setNombre(nombre);
+        this.setTelefono(telefono);
+        this.setDiaDeTurno(diaDeTurno);
+        this.setDireccion(direccion);
+        this.setGeoLocalizacion(new Punto(String.valueOf(randomGenerator.nextInt(9999999)), String.valueOf(randomGenerator.nextInt(9999999))));
+    }
+
+    public Farmacia(String nombre, String telefono, String diaDeTurno, Direccion direccion, Punto coordenadas) {
+        this.setNombre(nombre);
+        this.setTelefono(telefono);
+        this.setDiaDeTurno(diaDeTurno);
+        this.setDireccion(direccion);
+        this.setGeoLocalizacion(coordenadas);
     }
 
     public Long getId() {
@@ -61,5 +81,13 @@ public class Farmacia {
 
     public void setGeoLocalizacion(Punto geoLocalizacion) {
         this.geoLocalizacion = geoLocalizacion;
+    }
+
+    public Direccion getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(Direccion direccion) {
+        this.direccion = direccion;
     }
 }
