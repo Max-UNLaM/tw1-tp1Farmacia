@@ -49,4 +49,10 @@ public class FarmaciaDaoImpl extends BaseDaoFarmacia implements FarmaciaDao {
                 Restrictions.eq("nombre", nombre)
         ).list();
     }
+
+    @SuppressWarnings("unchecked")
+    public List<Farmacia> getGarmaciasByTurno(String turno) {
+        return sessionFactory.getCurrentSession().createCriteria(Farmacia.class).add(
+                Restrictions.eq("diaDeTurno", "martes")).list();
+    }
 }

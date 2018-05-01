@@ -1,13 +1,14 @@
 package ar.edu.unlam.tallerweb1.queries;
 
 import ar.edu.unlam.tallerweb1.SpringTest;
+import ar.edu.unlam.tallerweb1.dao.Farmacia.FarmaciaBarrioDao;
+import ar.edu.unlam.tallerweb1.dao.Farmacia.FarmaciaComunaDao;
 import ar.edu.unlam.tallerweb1.dao.Farmacia.FarmaciaDaoImpl;
 import ar.edu.unlam.tallerweb1.dao.Farmacia.FarmaciaPuntoDao;
 import ar.edu.unlam.tallerweb1.interfaces.PuntoDao;
-import ar.edu.unlam.tallerweb1.modelo.Comuna;
-import ar.edu.unlam.tallerweb1.modelo.Direccion;
-import ar.edu.unlam.tallerweb1.modelo.Farmacia;
-import ar.edu.unlam.tallerweb1.modelo.Punto;
+import ar.edu.unlam.tallerweb1.modelo.*;
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,6 +18,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +34,14 @@ public class QueriesTest extends SpringTest {
     @Autowired
     private FarmaciaPuntoDao farmaciaPuntoDao;
 
-    Farmacia farmaciaBase;
+    @Autowired
+    private FarmaciaComunaDao comunaDao;
+
+    @Autowired
+    private FarmaciaBarrioDao barrioDao;
+
+    @Inject
+    private SessionFactory sessionFactory;
 
     @Before
     public void mockData() {
@@ -40,22 +49,33 @@ public class QueriesTest extends SpringTest {
         comunas.add(new Comuna("Uno"));
         comunas.add(new Comuna("Dos"));
         comunas.add(new Comuna("Tres"));
-        comunas.add(new  Comuna("Veinte"));
-        Direccion direccion = new Direccion("Alcides", 123, "Temperley", "Veinte");
-        farmaciaBase = new Farmacia("Prueba", "123123123", "martes", direccion);
+        comunas.add(new Comuna("Veinte"));
+        for (Comuna comuna : comunas) {
+            comunaDao.addComuna(comuna);
+        }
+        List<Farmacia> farmacias = new ArrayList<>();
+        Direccion direccionUno = new Direccion("Alcides", 123, "BarrioUno", "Uno");
+        Farmacia farmaciaUno = new Farmacia("Prueba", "123123123", "martes", direccionUno);
+        Direccion direccionDos = new Direccion("Juan", 3333, "BarioDos", "Dos");
+        Farmacia farmaciaDos = new Farmacia("PruebaDos", "313213", "jueves", direccionDos);
+        Direccion direccionTres = new Direccion("Perez", 4444, "BarrioUno", "Uno");
+        Farmacia farmaciaTres = new Farmacia("PruebaTres", "1111", "martes", direccionTres);
+        farmacias.add(farmaciaUno);
+        farmacias.add(farmaciaDos);
+        farmacias.add(farmaciaTres);
+        for (Farmacia farm : farmacias) {
+            farmaciaDao.addFarmacia(farm);
+        }
     }
 
     @Test
     @Transactional
     @Rollback()
-    public void alGenerarFarmaciaGuardarData() {
-        boolean nuevaFarmacia = farmaciaDao.addFarmacia(farmaciaBase);
-        List<Farmacia> farmacias = farmaciaDao.getFarmaciasByName("Prueba");
-        for (Farmacia farmacia : farmacias) {
-            assertThat(farmacia.getNombre()).isEqualTo("Prueba");
+    public void leerFarmaciasMartes() {
+        String turno = "martes";
+        List<Farmacia> farmaciaDeMartes = farmaciaDao.getGarmaciasByTurno(turno);
+        for (Farmacia farmacia : farmaciaDeMartes) {
+            assertThat(farmacia.getDiaDeTurno()).isEqualTo(turno);
         }
-        Punto punto = farmaciaPuntoDao.getPuntoById(farmaciaBase.getGeoLocalizacion().getId());
-        assertThat(punto.getId()).isEqualTo(farmaciaBase.getGeoLocalizacion().getId());
     }
-
 }
