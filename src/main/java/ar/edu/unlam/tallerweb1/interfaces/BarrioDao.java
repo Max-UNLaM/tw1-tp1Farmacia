@@ -5,7 +5,7 @@ import ar.edu.unlam.tallerweb1.modelo.Barrio;
 import java.util.List;
 
 public interface BarrioDao {
-    void addBarrio(Barrio comuna);
+    boolean addBarrio(Barrio comuna);
 
     Barrio getBarrioById(Long id);
 

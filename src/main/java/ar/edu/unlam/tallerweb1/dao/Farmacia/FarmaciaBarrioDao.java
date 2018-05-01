@@ -3,6 +3,7 @@ package ar.edu.unlam.tallerweb1.dao.Farmacia;
 import ar.edu.unlam.tallerweb1.dao.BaseDaoFarmacia;
 import ar.edu.unlam.tallerweb1.interfaces.BarrioDao;
 import ar.edu.unlam.tallerweb1.modelo.Barrio;
+import ar.edu.unlam.tallerweb1.modelo.Comuna;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,11 +32,18 @@ public class FarmaciaBarrioDao extends BaseDaoFarmacia implements BarrioDao {
     }
 
     @Override
-    public void addBarrio(Barrio barrio) {
+    public boolean addBarrio(Barrio barrio) {
         List<Barrio> barrios = this.getBarrioByName(barrio.getNombre());
         if (barrios.isEmpty()) {
-            farmaciaComunaDao.addComuna(barrio.getComuna());
+            boolean nuevaComuna = farmaciaComunaDao.addComuna(barrio.getComuna());
+            if (nuevaComuna) {
+                List<Comuna> comunas = farmaciaComunaDao.getComunaByName(barrio.getComuna().getNombre());
+                barrio.setComuna(comunas.get(0));
+            }
             this.saveBarrio(barrio);
+            return true;
+        } else {
+            return false;
         }
     }
 

@@ -79,7 +79,6 @@ fabric.properties
 /.idea/tw1-tp1Farmacia.iml
 /.idea/misc.xml
 /.idea/modules.xml
-/src/main/resources/hibernateContext.xml
 Sera borrado target/generated-sources/
 Sera borrado target/generated-test-sources/
 Sera borrado target/proyecto-limpio-spring-0.0.1-SNAPSHOT/

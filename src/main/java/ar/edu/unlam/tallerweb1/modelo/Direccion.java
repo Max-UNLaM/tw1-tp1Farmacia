@@ -14,6 +14,12 @@ public class Direccion {
 
     public Direccion(){}
 
+    public Direccion(String calle, Number numero, Barrio barrio) {
+        setCalle(calle);
+        setNumero(numero);
+        setBarrio(barrio);
+    }
+
     public Direccion(String calle, Number numero, String barrio, String comuna) {
         setCalle(calle);
         setNumero(numero);

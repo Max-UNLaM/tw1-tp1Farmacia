@@ -28,9 +28,10 @@ public class FarmaciaDireccionDao extends BaseDaoFarmacia implements DireccionDa
     }
 
     private void saveDireccion(Direccion direccion) {
-        List<Barrio> barrios = farmaciaBarrioDao.getBarrioByName(direccion.getBarrio().getNombre());
-        if (barrios.isEmpty()) {
-            farmaciaBarrioDao.addBarrio(direccion.getBarrio());
+        boolean nuevoBarrio = farmaciaBarrioDao.addBarrio(direccion.getBarrio());
+        if (!nuevoBarrio) {
+            List<Barrio> barrioGuardado = farmaciaBarrioDao.getBarrioByName(direccion.getBarrio().getNombre());
+            direccion.setBarrio(barrioGuardado.get(0));
         }
         sessionFactory.getCurrentSession().save(direccion);
     }

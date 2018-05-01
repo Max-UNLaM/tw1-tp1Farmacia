@@ -4,6 +4,7 @@ import ar.edu.unlam.tallerweb1.SpringTest;
 import ar.edu.unlam.tallerweb1.dao.Farmacia.FarmaciaDaoImpl;
 import ar.edu.unlam.tallerweb1.dao.Farmacia.FarmaciaPuntoDao;
 import ar.edu.unlam.tallerweb1.interfaces.PuntoDao;
+import ar.edu.unlam.tallerweb1.modelo.Comuna;
 import ar.edu.unlam.tallerweb1.modelo.Direccion;
 import ar.edu.unlam.tallerweb1.modelo.Farmacia;
 import ar.edu.unlam.tallerweb1.modelo.Punto;
@@ -16,6 +17,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
@@ -34,9 +36,13 @@ public class QueriesTest extends SpringTest {
 
     @Before
     public void mockData() {
+        List<Comuna> comunas = new ArrayList<>();
+        comunas.add(new Comuna("Uno"));
+        comunas.add(new Comuna("Dos"));
+        comunas.add(new Comuna("Tres"));
+        comunas.add(new  Comuna("Veinte"));
         Direccion direccion = new Direccion("Alcides", 123, "Temperley", "Veinte");
         farmaciaBase = new Farmacia("Prueba", "123123123", "martes", direccion);
-
     }
 
     @Test

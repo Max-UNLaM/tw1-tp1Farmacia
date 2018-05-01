@@ -28,10 +28,13 @@ public class FarmaciaComunaDao implements ComunaDao {
     }
 
     @Override
-    public void addComuna(Comuna comuna) {
+    public boolean addComuna(Comuna comuna) {
         List<Comuna> comunas = this.getComunaByName(comuna.getNombre());
         if (comunas.isEmpty()) {
             this.saveComuna(comuna);
+            return true;
+        } else {
+            return false;
         }
     }
 
