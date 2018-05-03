@@ -19,9 +19,11 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.System.out;
 import static org.assertj.core.api.Assertions.*;
 
 @ContextConfiguration(locations = {"/test-applicationContext.xml"})
@@ -78,4 +80,30 @@ public class QueriesTest extends SpringTest {
             assertThat(farmacia.getDiaDeTurno()).isEqualTo(turno);
         }
     }
+
+    @Test
+    @Transactional
+    @Rollback
+    public void buscarTodasFarmaciasDeUnaCalle(){
+        String  calle = "Av.De Mayo";
+        List <Farmacia> farmaciaDeUnaCalle = farmaciaDao.getTodasLasFarmaciasDeUnaCalle(calle);
+        for (Farmacia farmacia : farmaciaDeUnaCalle){
+            assertThat(farmacia.getDireccion().getCalle()). isEqualTo (calle);
+        }
+    }
+
+    @Test
+    @Transactional
+    @Rollback
+    public void buscarTodasFarmaciasDeUnBarrio(){
+        String  nombre = "barrioUno";
+        List <Farmacia> farmaciasDeUnBarrio = farmaciaDao.getTodasLasFarmaciasDeUnBarrio(nombre);
+        for (Farmacia farmacia : farmaciasDeUnBarrio){
+            assertThat(farmacia.getDireccion().getBarrio().getNombre()).isEqualTo(nombre);
+        }
+    }
+
+
+
+
 }

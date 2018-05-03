@@ -53,6 +53,21 @@ public class FarmaciaDaoImpl extends BaseDaoFarmacia implements FarmaciaDao {
     @SuppressWarnings("unchecked")
     public List<Farmacia> getGarmaciasByTurno(String turno) {
         return sessionFactory.getCurrentSession().createCriteria(Farmacia.class).add(
-                Restrictions.eq("diaDeTurno", "martes")).list();
+                Restrictions.eq("diaDeTurno", turno)).list();
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<Farmacia> getTodasLasFarmaciasDeUnaCalle(String calle) {
+        return sessionFactory.getCurrentSession().createCriteria(Farmacia.class).createAlias("direccion", "direccion").add(
+                Restrictions.eq("direccion.calle", calle)).list();
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<Farmacia> getTodasLasFarmaciasDeUnBarrio(String nombre) {
+        return sessionFactory.getCurrentSession().createCriteria(Farmacia.class)
+                .createAlias("direccion.barrio", "barrio")
+                .add(
+                        Restrictions.eq("barrio.nombre", nombre)
+                ).list();
     }
 }
