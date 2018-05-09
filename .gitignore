@@ -83,3 +83,15 @@ Sera borrado target/generated-sources/
 Sera borrado target/generated-test-sources/
 Sera borrado target/proyecto-limpio-spring-0.0.1-SNAPSHOT/
 proyecto-limpio-spring.iml
+Sera borrado target/proyecto-limpio-spring-0.0.1-SNAPSHOT/.gitignore
+Sera borrado target/proyecto-limpio-spring-0.0.1-SNAPSHOT/META-INF/
+Sera borrado target/proyecto-limpio-spring-0.0.1-SNAPSHOT/WEB-INF/classes/.gitkeep
+Sera borrado target/proyecto-limpio-spring-0.0.1-SNAPSHOT/WEB-INF/classes/applicationContext.xml
+Sera borrado target/proyecto-limpio-spring-0.0.1-SNAPSHOT/WEB-INF/classes/hibernateContext.xml
+Sera borrado target/proyecto-limpio-spring-0.0.1-SNAPSHOT/WEB-INF/classes/log4j.properties
+Sera borrado target/proyecto-limpio-spring-0.0.1-SNAPSHOT/WEB-INF/classes/spring-servlet.xml
+Sera borrado target/proyecto-limpio-spring-0.0.1-SNAPSHOT/WEB-INF/vistas/
+Sera borrado target/proyecto-limpio-spring-0.0.1-SNAPSHOT/WEB-INF/web.xml
+Sera borrado target/proyecto-limpio-spring-0.0.1-SNAPSHOT/css/
+Sera borrado target/proyecto-limpio-spring-0.0.1-SNAPSHOT/fonts/
+Sera borrado target/proyecto-limpio-spring-0.0.1-SNAPSHOT/js/
