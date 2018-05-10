@@ -5,6 +5,7 @@ import ar.edu.unlam.tallerweb1.modelo.Calculadora;
 import ar.edu.unlam.tallerweb1.modelo.CalculadoraError;
 import ar.edu.unlam.tallerweb1.modelo.CalculadoraExito;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -27,12 +28,14 @@ public class CalculadoraController {
     }
 
     public ModelAndView exito() {
-        CalculadoraExito resultado = new CalculadoraExito(
+        CalculadoraExito exitoModel = new CalculadoraExito(
                 this.getCalculadora().getOperandoUno().toString(),
                 this.getCalculadora().getOperandoDos().toString(),
                 this.getCalculadora().getResultado().toString()
         );
-        return new ModelAndView("exito", "exitoModel", resultado);
+        ModelMap exitoModelMap = new ModelMap();
+        exitoModelMap.put("resultado", exitoModel);
+        return new ModelAndView("exito", exitoModelMap);
     }
 
     public ModelAndView error() {
