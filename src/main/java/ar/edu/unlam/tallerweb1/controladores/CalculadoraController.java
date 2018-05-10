@@ -4,10 +4,12 @@ import ar.edu.unlam.tallerweb1.excepciones.ErrorDeAccesoException;
 import ar.edu.unlam.tallerweb1.modelo.Calculadora;
 import ar.edu.unlam.tallerweb1.modelo.CalculadoraError;
 import ar.edu.unlam.tallerweb1.modelo.CalculadoraExito;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+@Controller
 public class CalculadoraController {
     protected Calculadora calculadora;
     protected static final String ERROR_AMIGABLE = "Hubo un error al realizar el cálculo. x.x";
