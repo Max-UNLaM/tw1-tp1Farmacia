@@ -4,7 +4,7 @@
     <groupId>proyecto-limpio-spring</groupId>
     <artifactId>proyecto-limpio-spring</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-	<packaging>WAR</packaging>
+	<packaging>war</packaging>
     <build>
         <resources>
             <resource>
