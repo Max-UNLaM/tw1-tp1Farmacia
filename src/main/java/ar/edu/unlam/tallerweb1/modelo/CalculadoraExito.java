@@ -1,18 +1,21 @@
 package ar.edu.unlam.tallerweb1.modelo;
 
 public class CalculadoraExito {
-    protected String operacion;
-    protected String operandoUno;
-    protected String operandoDos;
+    public String operacion;
+    public String operandoUno;
+    public String operandoDos;
+    public String resultado;
 
-    public CalculadoraExito() {}
-    
-    public CalculadoraExito(String operacion, String operandoUno, String operandoDos) {
+    public CalculadoraExito() {
+    }
+
+    public CalculadoraExito(String operandoUno, String operandoDos, String operacion, String resultado) {
         setOperacion(operacion);
         setOperandoUno(operandoUno);
         setOperandoDos(operandoDos);
+        setResultado(resultado);
     }
-    
+
     public String getOperacion() {
         return operacion;
     }
@@ -35,5 +38,13 @@ public class CalculadoraExito {
 
     public void setOperandoDos(String operandoDos) {
         this.operandoDos = operandoDos;
+    }
+
+    public String getResultado() {
+        return resultado;
+    }
+
+    public void setResultado(String resultado) {
+        this.resultado = resultado;
     }
 }

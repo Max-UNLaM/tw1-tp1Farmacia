@@ -1,3 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -7,12 +10,16 @@
 <body>
     <div class="jumbotron jumbotron-fluid">
         <div class="container">
-            <h1 class="display-4">Resultado de la operacion</h1>
+            <h1 class="display-4">Resultado</h1>
         </div>
     </div>
-    <div class="alert alert-primary" role="alert" eigth=50px>
-        <h4>[resultado exitoso]</h4>
+    <div class="container col-md-4 col-md-offset-2 col-sm-12">
+        <ul class="list-group">
+            <li class="list-group-item"><span class="badge badge-secondary">Primer operando</span>${resultado.operandoUno}</li>
+            <li class="list-group-item"><span class="badge badge-secondary">Operación</span>${resultado.operacion}</li>
+            <li class="list-group-item"><span class="badge badge-secondary">Segundo operando</span>${resultado.operandoDos}</li>
+            <li class="list-group-item"><span class="badge badge-secondary">Resultado</span>${resultado.resultado}</li>
+        </ul>
     </div>
 </body>
 </html>
-

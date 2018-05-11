@@ -6,8 +6,8 @@ import ar.edu.unlam.tallerweb1.modelo.CalculadoraError;
 import ar.edu.unlam.tallerweb1.modelo.CalculadoraExito;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -16,21 +16,22 @@ public class CalculadoraController {
     protected static final String ERROR_AMIGABLE = "Hubo un error al realizar el cálculo. x.x";
 
     @RequestMapping(path = "/calcular/{operando_uno}/{operando_dos}/{operacion}")
-    public void calcular(@RequestParam(value = "operacion") String operacion,
-                         @RequestParam(value = "operando_uno") Integer operandoUno,
-                         @RequestParam(value = "operando_dos") Integer operandoDos) {
+    public ModelAndView calcular(@PathVariable(value = "operacion") String operacion,
+                         @PathVariable(value = "operando_uno") Integer operandoUno,
+                         @PathVariable(value = "operando_dos") Integer operandoDos) {
         try {
             setCalculadora(new Calculadora(operacion, operandoUno, operandoDos));
         } catch (ArithmeticException | ErrorDeAccesoException error) {
-            this.error();
+            return this.error();
         }
-        this.exito();
+        return this.exito();
     }
 
     public ModelAndView exito() {
         CalculadoraExito exitoModel = new CalculadoraExito(
                 this.getCalculadora().getOperandoUno().toString(),
                 this.getCalculadora().getOperandoDos().toString(),
+                this.getCalculadora().getOperacion(),
                 this.getCalculadora().getResultado().toString()
         );
         ModelMap exitoModelMap = new ModelMap();
