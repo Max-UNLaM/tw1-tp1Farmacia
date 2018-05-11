@@ -41,7 +41,9 @@ public class CalculadoraController {
 
     public ModelAndView error() {
         CalculadoraError errorModel = new CalculadoraError(ERROR_AMIGABLE, getCalculadora().getError().getMessage());
-        return new ModelAndView("error", "errorModel", errorModel);
+        ModelMap errorModelMap = new ModelMap();
+        errorModelMap.put("errorCal", errorModel);
+        return new ModelAndView("error", errorModelMap);
     }
 
     public Calculadora getCalculadora() {
