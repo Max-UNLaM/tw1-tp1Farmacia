@@ -79,6 +79,4 @@ fabric.properties
 /.idea/tw1-tp1Farmacia.iml
 /.idea/misc.xml
 /.idea/modules.xml
-proyecto-limpio-spring.iml
 /src/main/resources/hibernateContext.xml
-/target/
