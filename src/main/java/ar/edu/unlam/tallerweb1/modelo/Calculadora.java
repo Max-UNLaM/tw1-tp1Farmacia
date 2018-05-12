@@ -36,7 +36,7 @@ public class Calculadora {
                 Integer multiplicacion = getOperandoUno() * getOperandoDos();
                 return multiplicacion.doubleValue();
             case "division":
-                return (double)getOperandoUno() / (double)getOperandoDos();
+                return (double)(getOperandoUno() / getOperandoDos());
         }
         throw new ErrorDeAccesoException("No se admite la operación dada");
     }

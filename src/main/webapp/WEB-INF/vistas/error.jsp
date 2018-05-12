@@ -10,8 +10,12 @@
         <h1 class="display-4">Resultado de la operacion</h1>
     </div>
 </div>
-<div class="alert alert-danger" role="alert" eigth=50px>
-    <h4>[resultado exitoso]</h4>
+<div class="alert alert-danger" role="alert">
+    <h4>${errorCal.mensajeAmigable}</h4>
+    <h4>${errorCal.mensajeTecnico}</h4>
+    <h4>${errorCal.error}</h4>
+    <h4>${errorCal.ERROR_AMIGABLE}</h4>
+
 </div>
 </body>
 </html>
