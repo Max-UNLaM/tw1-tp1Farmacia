@@ -15,6 +15,7 @@
     <bean id="farmaciaBarrioDao" class="ar.edu.unlam.tallerweb1.dao.Farmacia.FarmaciaBarrioDao"/>
     <bean id="farmaciaComunaDao" class="ar.edu.unlam.tallerweb1.dao.Farmacia.FarmaciaComunaDao"/>
     <bean id="farmaciaPuntoDao" class="ar.edu.unlam.tallerweb1.dao.Farmacia.FarmaciaPuntoDao"/>
+    <bean id="calculadora" class="ar.edu.unlam.tallerweb1.modelo.Calculadora" />
 
 </beans>
 
