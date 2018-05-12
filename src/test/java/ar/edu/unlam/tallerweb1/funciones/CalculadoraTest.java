@@ -7,7 +7,9 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+
 import static org.assertj.core.api.Assertions.*;
+import static java.lang.System.out;
 
 @ContextConfiguration(locations = {"/test-applicationContext.xml"})
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -30,6 +32,7 @@ public class CalculadoraTest {
         Integer mockSuma = OPERANDO_UNO + OPERANDO_DOS;
         Double resultado = mockSuma.doubleValue();
         calculadora = new Calculadora(MULTIPLICACIO, OPERANDO_UNO, OPERANDO_DOS);
+        calculadora.realizarCalculo();
         assertThat(calculadora.getResultado()).isEqualTo(resultado);
     }
 
@@ -38,30 +41,37 @@ public class CalculadoraTest {
         Integer mock = OPERANDO_UNO - OPERANDO_DOS;
         Double resultado = mock.doubleValue();
         calculadora = new Calculadora(RESTA, OPERANDO_UNO, OPERANDO_DOS);
+        calculadora.realizarCalculo();
         assertThat(calculadora.getResultado()).isEqualTo(resultado);
     }
+
     @Test
     public void probarDivision() {
         Integer mock = OPERANDO_UNO / OPERANDO_DOS;
         Double resultado = mock.doubleValue();
         calculadora = new Calculadora(DIVISION, OPERANDO_UNO, OPERANDO_DOS);
+        calculadora.realizarCalculo();
         assertThat(calculadora.getResultado()).isEqualTo(resultado);
     }
+
     @Test
     public void probarMultiplicacion() {
         Integer mock = OPERANDO_UNO * OPERANDO_DOS;
         Double resultado = mock.doubleValue();
         calculadora = new Calculadora(MULTIPLICACION, OPERANDO_UNO, OPERANDO_DOS);
+        calculadora.realizarCalculo();
         assertThat(calculadora.getResultado()).isEqualTo(resultado);
     }
 
-    @Test (expected = ErrorDeAccesoException.class)
+    @Test(expected = ErrorDeAccesoException.class)
     public void probarErrorIngreso() {
         calculadora = new Calculadora(CUALQUIER_COSA, OPERANDO_UNO, OPERANDO_DOS);
+        calculadora.realizarCalculo();
     }
 
-    @Test (expected = ArithmeticException.class)
+    @Test(expected = ArithmeticException.class)
     public void probarErrorMatematico() {
         calculadora = new Calculadora(DIVISION, OPERANDO_UNO, 0);
+        calculadora.realizarCalculo();
     }
 }

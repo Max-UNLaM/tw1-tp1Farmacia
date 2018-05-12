@@ -7,7 +7,6 @@ public class Calculadora {
     protected Integer operandoUno;
     protected Integer operandoDos;
     protected double resultado;
-    protected Exception error;
 
     public Calculadora() {
     }
@@ -17,10 +16,9 @@ public class Calculadora {
         setOperacion(operacion);
         setOperandoUno(operandoUno);
         setOperandoDos(operandoDos);
-        this.obtenerResultado();
     }
 
-    public void obtenerResultado() {
+    public void realizarCalculo() {
         this.setResultado(this.calcular());
     }
 
@@ -71,13 +69,5 @@ public class Calculadora {
 
     public void setResultado(Double resultado) {
         this.resultado = resultado;
-    }
-
-    public Exception getError() {
-        return error;
-    }
-
-    public void setError(Exception error) {
-        this.error = error;
     }
 }

@@ -14,14 +14,17 @@ import org.springframework.web.servlet.ModelAndView;
 public class CalculadoraController {
     protected Calculadora calculadora;
     protected static final String ERROR_AMIGABLE = "Hubo un error al realizar el cálculo. x.x";
-
+    public CalculadoraError calculadoraErrorModel = new CalculadoraError();
     @RequestMapping(path = "/calcular/{operando_uno}/{operando_dos}/{operacion}")
     public ModelAndView calcular(@PathVariable(value = "operacion") String operacion,
-                         @PathVariable(value = "operando_uno") Integer operandoUno,
-                         @PathVariable(value = "operando_dos") Integer operandoDos) {
+                                 @PathVariable(value = "operando_uno") Integer operandoUno,
+                                 @PathVariable(value = "operando_dos") Integer operandoDos) {
+        setCalculadora(new Calculadora(operacion, operandoUno, operandoDos));
         try {
-            setCalculadora(new Calculadora(operacion, operandoUno, operandoDos));
+            getCalculadora().realizarCalculo();
         } catch (ArithmeticException | ErrorDeAccesoException error) {
+            this.calculadoraErrorModel.setMensajeAmigable(ERROR_AMIGABLE);
+            this.calculadoraErrorModel.setMensajeTecnico(error.getMessage());
             return this.error();
         }
         return this.exito();
@@ -40,9 +43,8 @@ public class CalculadoraController {
     }
 
     public ModelAndView error() {
-        CalculadoraError errorModel = new CalculadoraError(ERROR_AMIGABLE, getCalculadora().getError().getMessage());
         ModelMap errorModelMap = new ModelMap();
-        errorModelMap.put("errorCal", errorModel);
+        errorModelMap.put("errorCal", this.calculadoraErrorModel);
         return new ModelAndView("error", errorModelMap);
     }
 

@@ -13,11 +13,11 @@
         <h1 class="display-4">Resultado de la operacion</h1>
     </div>
 </div>
-<div class="alert alert-danger" role="alert">
-    <h4>${errorCal.mensajeAmigable}</h4>
-    <h4>${errorCal.mensajeTecnico}</h4>
-    <h4>${errorCal.error}</h4>
-    <h4>${errorCal.ERROR_AMIGABLE}</h4>
+<div class="container col-md-4 col-md-offset-2 col-sm-12">
+    <div class="alert alert-danger" role="alert">
+        <h4>${errorCal.mensajeAmigable}</h4>
+        <h4>${errorCal.mensajeTecnico}</h4>
+    </div>
 </div>
 </body>
 </html>
