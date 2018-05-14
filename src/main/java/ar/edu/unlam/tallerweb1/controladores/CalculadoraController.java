@@ -12,47 +12,35 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class CalculadoraController {
-    protected Calculadora calculadora;
-    protected static final String ERROR_AMIGABLE = "Hubo un error al realizar el cálculo. x.x";
-    public CalculadoraError calculadoraErrorModel = new CalculadoraError();
     @RequestMapping(path = "/calcular/{operando_uno}/{operando_dos}/{operacion}")
     public ModelAndView calcular(@PathVariable(value = "operacion") String operacion,
                                  @PathVariable(value = "operando_uno") Integer operandoUno,
                                  @PathVariable(value = "operando_dos") Integer operandoDos) {
-        setCalculadora(new Calculadora(operacion, operandoUno, operandoDos));
+        Calculadora calculadora = new Calculadora(operacion, operandoUno, operandoDos);
         try {
-            getCalculadora().realizarCalculo();
+            calculadora.realizarCalculo();
         } catch (ArithmeticException | ErrorDeAccesoException error) {
-            this.calculadoraErrorModel.setMensajeAmigable(ERROR_AMIGABLE);
-            this.calculadoraErrorModel.setMensajeTecnico(error.getMessage());
-            return this.error();
+            return this.error(error.getMessage());
         }
-        return this.exito();
+        return this.exito(calculadora);
     }
 
-    public ModelAndView exito() {
+    public ModelAndView exito(Calculadora calculadora) {
         CalculadoraExito exitoModel = new CalculadoraExito(
-                this.getCalculadora().getOperandoUno().toString(),
-                this.getCalculadora().getOperandoDos().toString(),
-                this.getCalculadora().getOperacion(),
-                this.getCalculadora().getResultado().toString()
+                calculadora.getOperandoUno().toString(),
+                calculadora.getOperandoDos().toString(),
+                calculadora.getOperacion(),
+                calculadora.getResultado().toString()
         );
         ModelMap exitoModelMap = new ModelMap();
         exitoModelMap.put("resultado", exitoModel);
         return new ModelAndView("exito", exitoModelMap);
     }
 
-    public ModelAndView error() {
+    public ModelAndView error(String message) {
+        CalculadoraError calculadoraErrorModel = new CalculadoraError(message);
         ModelMap errorModelMap = new ModelMap();
-        errorModelMap.put("errorCal", this.calculadoraErrorModel);
+        errorModelMap.put("errorCal", calculadoraErrorModel);
         return new ModelAndView("error", errorModelMap);
-    }
-
-    public Calculadora getCalculadora() {
-        return calculadora;
-    }
-
-    public void setCalculadora(Calculadora calculadora) {
-        this.calculadora = calculadora;
     }
 }

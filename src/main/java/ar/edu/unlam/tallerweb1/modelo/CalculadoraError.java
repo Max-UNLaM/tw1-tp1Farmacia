@@ -3,11 +3,11 @@ package ar.edu.unlam.tallerweb1.modelo;
 public class CalculadoraError {
     protected String mensajeAmigable;
     protected String mensajeTecnico;
-
+    protected static final String ERROR_AMIGABLE = "Hubo un error al realizar el cálculo. x.x";
     public CalculadoraError(){}
 
-    public CalculadoraError(String mensajeAmigable, String mensajeTecnico) {
-        setMensajeAmigable(mensajeAmigable);
+    public CalculadoraError(String mensajeTecnico) {
+        setMensajeAmigable(ERROR_AMIGABLE);
         setMensajeTecnico(mensajeTecnico);
     }
 
